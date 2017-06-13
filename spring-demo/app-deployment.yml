@@ -1,0 +1,42 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: web
+    spec:
+      containers:
+      - image: surendrakumar/spring-mysql:v3
+        imagePullPolicy: IfNotPresent
+        name: spring-docker
+        env:
+        # consume the property-like keys in environment variables
+        - name: APP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: special-config
+              key: app_port
+        - name: MYSQL_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: special-config
+              key: mysql_port
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: special-config
+              key: mysql_host
+        - name: MYSQL_DB
+          valueFrom:
+            configMapKeyRef:
+              name: special-config
+              key: mysql_db
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: special-config
+              key: mysql_user 

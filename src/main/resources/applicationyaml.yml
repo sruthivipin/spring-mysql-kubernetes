@@ -1,0 +1,14 @@
+spring:
+    jpa:
+        database: MYSQL
+        hibernate:
+            ddl-auto: create
+
+    datasource:
+        url: jdbc:mysql://localhost:3306/docker
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+
+server:
+  port: 8081

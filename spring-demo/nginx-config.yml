@@ -1,0 +1,18 @@
+apiVersion: v1
+data:
+  default.conf: |
+    upstream web-service {
+      server web-service.default.svc.cluster.local;
+    }
+    server { # simple load balancing
+      listen          80;
+      location / {
+        proxy_pass      http://web-service/demo/all;
+      }
+    } 
+        
+kind: ConfigMap 
+metadata:
+  creationTimestamp: 2017-06-08T12:03:04Z
+  name: my-nginx-v1 
+  namespace: default
